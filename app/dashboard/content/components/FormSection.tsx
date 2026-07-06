@@ -29,10 +29,10 @@ function FormSection({selectedTemplate,userFormInput,loading}:PROPS) {
     }
 
   return (
-    <div className='p-5 shadow-md border rounded-lg bg-white'>
+    <div className='min-w-0 rounded-lg border bg-white p-4 shadow-md sm:p-5'>
         
         <Image src={selectedTemplate?.icon as string} alt='icon' width={70} height={70}/>
-        <h2 className='font-bold text-2xl mb-2 text-primary'>{selectedTemplate?.name}</h2>
+        <h2 className='mb-2 text-xl font-bold text-primary sm:text-2xl'>{selectedTemplate?.name}</h2>
         <p className='text-gray-500 text-sm'>{selectedTemplate?.desc}</p>
 
         <form className='mt-7' onSubmit={onSubmit}>

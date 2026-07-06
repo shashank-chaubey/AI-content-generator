@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import UsageTrack from './UsageTrack';
 
-function SideNav(){
+function SideNav({ onNavigate }: { onNavigate?: () => void }){
   const MenuList = [
     {
       name: 'Home',
@@ -50,7 +50,7 @@ function SideNav(){
 
   return (
     <motion.div 
-      className='h-screen p-5 bg-white shadow-sm border relative'
+      className='relative h-full min-h-screen overflow-y-auto border bg-white p-5 shadow-sm'
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -69,7 +69,7 @@ function SideNav(){
 
       <div className='mt-3'>
         {MenuList.map((menu) => (
-          <Link key={menu.path} href={menu.path} className="block">
+          <Link key={menu.path} href={menu.path} className="block" onClick={onNavigate}>
             <motion.div 
               className={`flex gap-2 mb-2 p-3 rounded-lg cursor-pointer items-center
                 hover:bg-gradient-to-r from-blue-500 to-purple-500 hover:text-white transition-all duration-200
@@ -92,7 +92,7 @@ function SideNav(){
       </div>
       
       <motion.div 
-        className='absolute bottom-10 left-0 w-full'
+        className='mt-8 w-full pb-4'
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}

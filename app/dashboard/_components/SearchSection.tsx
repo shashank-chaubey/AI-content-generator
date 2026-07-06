@@ -23,11 +23,11 @@ function SearchSection({ onSearchInput }: { onSearchInput: (value: string) => vo
   }, []);
 
   return (
-    <div className="p-10 bg-gradient-to-r from-blue-500 to-purple-500 flex flex-col justify-center items-center text-white">
+    <section className="flex flex-col items-center justify-center bg-gradient-to-r from-blue-500 to-purple-500 px-4 py-8 text-center text-white sm:p-10">
       
       {/* Dynamic Changing Text */}
       <motion.h2
-        className="text-2xl font-bold flex items-center gap-2"
+        className="text-xl font-bold sm:text-2xl"
         key={currentText}
         initial={{ opacity: 0, y: -10 }}
         animate={{
@@ -43,7 +43,7 @@ function SearchSection({ onSearchInput }: { onSearchInput: (value: string) => vo
       {/* Search Bar */}
       <div className="w-full flex justify-center">
         <motion.div
-          className="flex gap-2 items-center p-3 border rounded-md bg-white my-5 w-[50%] shadow-lg"
+          className="my-5 flex w-full max-w-2xl items-center gap-2 rounded-md border bg-white p-3 shadow-lg"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
@@ -57,7 +57,7 @@ function SearchSection({ onSearchInput }: { onSearchInput: (value: string) => vo
           />
         </motion.div>
       </div>
-    </div>
+    </section>
   );
 }
 

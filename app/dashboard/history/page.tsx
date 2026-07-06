@@ -56,14 +56,14 @@ const HistoryPage = () => {
   };
 
   return (
-    <div className="p-10">
+    <div className="p-4 sm:p-6 lg:p-10">
       <Link href="/dashboard">
         <Button>
           <ArrowLeft /> Back
         </Button>
       </Link>
 
-      <h1 className="text-3xl font-bold mt-5">History</h1>
+      <h1 className="mt-5 text-2xl font-bold sm:text-3xl">History</h1>
       <p className="text-gray-600">Search your previously generated AI content</p>
 
       
@@ -81,7 +81,7 @@ const HistoryPage = () => {
       {filteredHistory.length === 0 ? (
         <p className="text-gray-500 mt-4">No history found.</p>
       ) : (
-        <div className="mt-6 overflow-x-auto">
+        <div className="mt-6 hidden overflow-x-auto md:block">
           <table className="w-full bg-white shadow-md rounded-lg">
             <thead>
               <tr className="bg-gray-200 text-left">
@@ -118,6 +118,41 @@ const HistoryPage = () => {
 </tbody>
 
           </table>
+        </div>
+      )}
+      {filteredHistory.length > 0 && (
+        <div className="mt-6 grid gap-4 md:hidden">
+          {filteredHistory.map((item) => {
+            const matchingTemplate = Templates.find((template) => template.slug === item.templateSlug);
+
+            return (
+              <article key={item.id} className="rounded-lg border bg-white p-4 shadow-sm">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex min-w-0 items-center gap-2">
+                    {matchingTemplate && (
+                      <img src={matchingTemplate.icon} alt="" className="h-7 w-7 shrink-0" />
+                    )}
+                    <h2 className="font-semibold">
+                      {matchingTemplate ? matchingTemplate.name : item.templateSlug}
+                    </h2>
+                  </div>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="shrink-0"
+                    onClick={() => copyToClipboard(item.aiResponse)}
+                  >
+                    <Clipboard size={16} /> Copy
+                  </Button>
+                </div>
+                <p className="mt-3 line-clamp-3 break-words text-sm text-gray-600">{item.aiResponse}</p>
+                <div className="mt-3 flex justify-between text-xs text-gray-500">
+                  <span>{item.createdAt}</span>
+                  <span>{item.aiResponse.split(" ").length} words</span>
+                </div>
+              </article>
+            );
+          })}
         </div>
       )}
     </div>

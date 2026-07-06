@@ -1,11 +1,11 @@
 "use client";
 import { UserButton, useUser } from "@clerk/nextjs";
-import { Wifi, Clock } from "lucide-react";
+import { Wifi, Clock, Menu } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-const Header = () => {
+const Header = ({ onMenuClick }: { onMenuClick: () => void }) => {
   const { user } = useUser();
   const [isOnline, setIsOnline] = useState(false);
   const [currentTime, setCurrentTime] = useState<string | null>(null); 
@@ -44,9 +44,17 @@ const Header = () => {
   const breadcrumbs = path.split("/").filter(Boolean);
 
   return (
-    <div className="p-6 shadow-sm border-b-2 bg-white flex justify-between items-center px-8">
+    <header className="sticky top-0 z-30 flex min-h-16 items-center justify-between gap-3 border-b bg-white px-4 py-3 shadow-sm sm:px-6">
+      <button
+        type="button"
+        aria-label="Open navigation"
+        onClick={onMenuClick}
+        className="rounded-md p-2 text-gray-700 hover:bg-gray-100 md:hidden"
+      >
+        <Menu className="h-6 w-6" />
+      </button>
       {/* Breadcrumbs */}
-      <div className="flex items-center gap-4 text-gray-600 text-sm">
+      <nav aria-label="Breadcrumb" className="min-w-0 flex-1 truncate text-sm text-gray-600">
         {breadcrumbs.map((crumb, index) => (
           <span key={index} className="capitalize">
             {index > 0 && <span className="mx-2">/</span>}
@@ -55,10 +63,10 @@ const Header = () => {
             </Link>
           </span>
         ))}
-      </div>
+      </nav>
 
       {/* Live Status Indicator and Time */}
-      <div className="flex items-center gap-6">
+      <div className="hidden items-center gap-4 lg:flex">
         <div className="flex items-center gap-2 border-l pl-4">
         <Wifi className="w-4 h-4 text-gray-600" />
           <span className={`w-3 h-3 rounded-full ${isOnline ? "bg-green-500" : "bg-gray-400"}`}></span>
@@ -79,10 +87,10 @@ const Header = () => {
       </div>
 
       {/* User Button */}
-      <div className="scale-125 border-l pl-4">
+      <div className="shrink-0 border-l pl-3 sm:scale-110">
         <UserButton />
       </div>
-    </div>
+    </header>
   );
 };
 

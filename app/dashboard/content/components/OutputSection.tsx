@@ -39,16 +39,16 @@ function OutputSection({ aiOutput, loading }: Props) {
   }, [aiOutput, loading]);
 
   return (
-    <div className='bg-white shadow-lg border rounded-lg'>
+    <div className='min-w-0 overflow-hidden rounded-lg border bg-white shadow-lg'>
       {aiOutput && !loading && (
-        <div className='flex justify-between items-center p-5'>
+        <div className='flex flex-wrap items-center justify-between gap-3 p-4 sm:p-5'>
           <h2>Here is your output:</h2>
           <Button className='flex gap-2' variant="outline" onClick={copyToClipboard}>
             <Clipboard className='w-4 h-4' /> Copy
           </Button>
         </div>
       )}
-      <div className='relative'>
+      <div className='relative overflow-x-auto'>
         {loading ? (
           <div className="absolute inset-0 flex items-center justify-center bg-white z-10">
             <p className="text-lg font-semibold text-gray-600 animate-pulse">✨ Generating Content... ✨</p>

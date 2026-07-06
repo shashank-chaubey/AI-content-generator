@@ -22,7 +22,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center text-center bg-black text-white px-6">
+    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-black px-4 py-10 text-center text-white sm:px-6">
       
       {/* Floating AI Light Animation */}
       <motion.div 
@@ -35,12 +35,12 @@ export default function Home() {
         animate={{ opacity: 1, scale: 1 }} 
         transition={{ duration: 0.6 }}
       >
-        <Image src="/logo.svg" alt="Logo" width={120} height={120} className="mb-6" />
+        <Image src="/logo.svg" alt="Logo" width={120} height={120} className="mb-4 h-20 w-20 sm:mb-6 sm:h-[120px] sm:w-[120px]" />
       </motion.div>
 
       {/* Hero Text with Fading Animation */}
       <motion.h1 
-        className="text-4xl md:text-6xl font-bold mb-4"
+        className="mb-4 min-h-[5rem] text-3xl font-bold sm:min-h-0 sm:text-4xl md:text-6xl"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
@@ -50,7 +50,7 @@ export default function Home() {
 
       {/* Subtitle */}
       <motion.p 
-        className="text-lg text-gray-400 mb-6 max-w-2xl leading-relaxed"
+        className="mb-6 max-w-2xl text-base leading-relaxed text-gray-400 sm:text-lg"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
@@ -61,7 +61,7 @@ export default function Home() {
 
       {/* Feature Cards */}
       <motion.div 
-        className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8"
+        className="mb-8 grid w-full max-w-5xl grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.3 }}

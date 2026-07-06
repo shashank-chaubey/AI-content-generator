@@ -76,13 +76,13 @@ const CreateNewContent: React.FC = () => {
   };
 
   return (
-    <div className="p-10">
+    <div className="p-4 sm:p-6 lg:p-10">
       <Link href={"/dashboard"}>
         <Button>
           <ArrowLeft /> Back
         </Button>
       </Link>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 py-5">
+      <div className="grid grid-cols-1 gap-5 py-5 xl:grid-cols-3">
         {/* Form Section */}
         <FormSection
           selectedTemplate={Templates.find((item) => item.slug === params["template-slug"])}
@@ -90,7 +90,7 @@ const CreateNewContent: React.FC = () => {
           loading={loading}
         />
         {/* Output Section */}
-        <div className="col-span-2">
+        <div className="min-w-0 xl:col-span-2">
           <OutputSection aiOutput={aiOutput} loading={loading} />
         </div>
       </div>

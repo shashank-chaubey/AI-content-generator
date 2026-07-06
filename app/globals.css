@@ -4,6 +4,22 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+.toastui-editor-defaultUI {
+  min-width: 0 !important;
+}
+
+@media (max-width: 640px) {
+  .toastui-editor-main-container {
+    min-width: 34rem;
+  }
 }
 
 @layer base {

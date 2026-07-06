@@ -7,14 +7,14 @@ export default function PrivacyPolicy() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center text-center bg-black text-white px-6">
+    <div className="relative flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center overflow-hidden bg-black px-4 py-10 text-center text-white sm:px-6">
       <motion.div 
         className="absolute top-10 left-1/3 w-24 h-24 bg-blue-500 blur-3xl opacity-20 animate-pulse"
       ></motion.div>
 
 
       <motion.h1 
-        className="text-4xl md:text-6xl font-bold mb-4"
+        className="mb-4 text-3xl font-bold sm:text-4xl md:text-6xl"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}

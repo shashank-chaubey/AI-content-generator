@@ -88,16 +88,16 @@ function BillingPage() {
   };
 
   return (
-    <div className="p-10 min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 px-4 py-8 sm:p-10">
       <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-      <h1 className="text-3xl font-bold text-center">Choose a Plan</h1>
+      <h1 className="text-center text-2xl font-bold sm:text-3xl">Choose a Plan</h1>
       <p className="text-gray-600 text-center mb-6">Upgrade your plan to get more AI credits.</p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
         {plans.map((plan, index) => (
           <div
             key={index}
-            className={`p-6 rounded-lg shadow-md border bg-white hover:shadow-xl transition-all cursor-pointer ${
+            className={`rounded-lg border bg-white p-5 shadow-md transition-all hover:shadow-xl sm:p-6 ${
               selectedPlan === plan.name ? "border-blue-500" : ""
             }`}
             onClick={() => setSelectedPlan(plan.name)}
