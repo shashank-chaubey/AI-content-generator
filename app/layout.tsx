@@ -11,7 +11,7 @@ const pops = Poppins({
 
 
 export const metadata: Metadata = {
-  title: "NNEGEN — AI Content Generator",
+  title: "ContGen — AI Content Generator",
   description: "Create blogs, social posts, emails, code explanations, and more with focused AI writing tools.",
 };
 

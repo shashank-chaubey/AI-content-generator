@@ -21,7 +21,7 @@ const tools = [
 
 const steps = [
   ["01", "Choose a template", "Pick the format that matches what you want to create."],
-  ["02", "Add your context", "Give NNEGEN a topic, tone, audience, or source text."],
+  ["02", "Add your context", "Give ContGen a topic, tone, audience, or source text."],
   ["03", "Generate and refine", "Get an editable draft, copy it, and revisit it from history."],
 ];
 
@@ -30,9 +30,9 @@ export default function Home() {
     <main className="min-h-screen bg-[#070b14] text-white">
       <nav className="sticky top-0 z-50 border-b border-white/10 bg-[#070b14]/85 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-6 lg:px-8">
-          <Link href="/" className="flex items-center gap-3" aria-label="NNEGEN home">
+          <Link href="/" className="flex items-center gap-3" aria-label="ContGen home">
             <Image src="/logo.svg" alt="" width={42} height={42} className="h-9 w-9 rounded-xl sm:h-10 sm:w-10" priority />
-            <span className="text-lg font-bold tracking-tight">NNEGEN</span>
+            <span className="text-lg font-bold tracking-tight">ContGen</span>
           </Link>
           <div className="hidden items-center gap-8 text-sm text-slate-300 md:flex">
             <Link href="#features" className="transition hover:text-white">Features</Link>
@@ -56,7 +56,7 @@ export default function Home() {
               Go from a rough idea to <span className="bg-gradient-to-r from-cyan-300 to-violet-400 bg-clip-text text-transparent">ready-to-use content.</span>
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
-              NNEGEN is a focused AI writing toolkit for creators, students, marketers, and developers. Choose a template, add context, and generate a strong first draft without wrestling with prompts.
+              ContGen is a focused AI writing toolkit for creators, students, marketers, and developers. Choose a template, add context, and generate a strong first draft without wrestling with prompts.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Link href="/dashboard" className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-cyan-400 to-violet-500 px-6 font-semibold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:-translate-y-0.5">
@@ -103,7 +103,7 @@ export default function Home() {
       <section id="how-it-works" className="py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-[.75fr_1.25fr] lg:items-start">
-            <div className="lg:sticky lg:top-28"><p className="text-sm font-semibold uppercase tracking-[0.2em] text-violet-300">A simple workflow</p><h2 className="mt-4 text-3xl font-bold sm:text-5xl">Less prompting. More creating.</h2><p className="mt-5 leading-7 text-slate-400">NNEGEN keeps generation, editing, credit tracking, and history together so your ideas do not disappear into scattered chats.</p></div>
+            <div className="lg:sticky lg:top-28"><p className="text-sm font-semibold uppercase tracking-[0.2em] text-violet-300">A simple workflow</p><h2 className="mt-4 text-3xl font-bold sm:text-5xl">Less prompting. More creating.</h2><p className="mt-5 leading-7 text-slate-400">ContGen keeps generation, editing, credit tracking, and history together so your ideas do not disappear into scattered chats.</p></div>
             <div className="space-y-4">{steps.map(([number, title, text]) => <article key={number} className="grid gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-5 sm:grid-cols-[4rem_1fr] sm:p-7"><span className="text-2xl font-bold text-cyan-300">{number}</span><div><h3 className="text-xl font-semibold">{title}</h3><p className="mt-2 leading-7 text-slate-400">{text}</p></div></article>)}</div>
           </div>
         </div>
@@ -111,13 +111,13 @@ export default function Home() {
 
       <section className="px-4 pb-20 sm:px-6 sm:pb-28 lg:px-8">
         <div className="mx-auto max-w-7xl overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-cyan-400/20 via-violet-500/15 to-transparent p-7 sm:p-12 lg:flex lg:items-center lg:justify-between">
-          <div className="max-w-2xl"><div className="mb-4 flex items-center gap-2 text-cyan-200"><History className="h-5 w-5" /><span className="text-sm font-semibold uppercase tracking-wider">Your ideas, organized</span></div><h2 className="text-3xl font-bold sm:text-4xl">Create your next draft while the idea is fresh.</h2><p className="mt-4 text-slate-300">Open the dashboard, choose a template, and let NNEGEN get the first version moving.</p></div>
-          <Link href="/dashboard" className="mt-7 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white px-6 font-semibold text-slate-950 transition hover:bg-cyan-100 lg:mt-0">Launch NNEGEN <ArrowRight className="h-4 w-4" /></Link>
+          <div className="max-w-2xl"><div className="mb-4 flex items-center gap-2 text-cyan-200"><History className="h-5 w-5" /><span className="text-sm font-semibold uppercase tracking-wider">Your ideas, organized</span></div><h2 className="text-3xl font-bold sm:text-4xl">Create your next draft while the idea is fresh.</h2><p className="mt-4 text-slate-300">Open the dashboard, choose a template, and let ContGen get the first version moving.</p></div>
+          <Link href="/dashboard" className="mt-7 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white px-6 font-semibold text-slate-950 transition hover:bg-cyan-100 lg:mt-0">Launch ContGen <ArrowRight className="h-4 w-4" /></Link>
         </div>
       </section>
 
       <footer className="border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-8 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8"><p>© {new Date().getFullYear()} NNEGEN. Create faster. Think further.</p><div className="flex gap-5"><Link href="/contact" className="hover:text-white">Contact</Link><Link href="/dashboard/Privacy_Policy" className="hover:text-white">Privacy</Link><Link href="/dashboard/T&C" className="hover:text-white">Terms</Link></div></div>
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-8 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8"><p>© {new Date().getFullYear()} ContGen. Create faster. Think further.</p><div className="flex gap-5"><Link href="/contact" className="hover:text-white">Contact</Link><Link href="/dashboard/Privacy_Policy" className="hover:text-white">Privacy</Link><Link href="/dashboard/T&C" className="hover:text-white">Terms</Link></div></div>
       </footer>
     </main>
   );

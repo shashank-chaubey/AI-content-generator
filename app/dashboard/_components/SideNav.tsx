@@ -46,9 +46,9 @@ function SideNav({ onNavigate }: { onNavigate?: () => void }){
           animate={{ scale: 1 }}
           transition={{ type: "spring", stiffness: 100 }}
         >
-          <Image src={'/logo.svg'} alt='NNEGEN logo' width={44} height={44} className='h-11 w-11 rounded-xl'/>
+          <Image src={'/logo.svg'} alt='ContGen logo' width={44} height={44} className='h-11 w-11 rounded-xl'/>
         </motion.div>
-        <div><p className='font-bold tracking-tight text-slate-900'>NNEGEN</p><p className='text-xs text-slate-500'>AI content studio</p></div>
+        <div><p className='font-bold tracking-tight text-slate-900'>ContGen</p><p className='text-xs text-slate-500'>AI content studio</p></div>
       </div>
 
       <Link href='/' onClick={onNavigate} className='mt-3 flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-medium text-slate-500 transition hover:bg-slate-100 hover:text-slate-900'><ArrowLeft className='h-4 w-4' /> Back to website</Link>

@@ -1,6 +1,6 @@
-# NNEGEN
+# ContGen
 
-NNEGEN is a responsive AI content-generation application built with Next.js. It provides ready-made templates for writing, marketing, education, coding, social media, and productivity tasks, then stores generated results in a personal history.
+ContGen is a responsive AI content-generation application built with Next.js. It provides ready-made templates for writing, marketing, education, coding, social media, and productivity tasks, then stores generated results in a personal history.
 
 ## Features
 
