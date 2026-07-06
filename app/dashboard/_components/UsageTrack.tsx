@@ -71,15 +71,15 @@ export function UsageTrack() {
     };
 
     return (
-        <div className='m-5'>
-            <div className='bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-md p-3'>
-                <h2 className='font-medium'>Credits</h2>
-                <div className='h-2 bg-[#998159] w-full rounded-full mt-2'>
-                    <div className='h-2 bg-white rounded-full' style={{ width: (totalUsage / maxWords) * 100 + "%" }}></div>
+        <div className='rounded-2xl border border-slate-200 bg-slate-50 p-3'>
+            <div>
+                <div className='flex items-center justify-between'><h2 className='text-sm font-semibold text-slate-800'>Monthly credits</h2><span className='text-xs text-slate-500'>{Math.round(Math.min((Number(totalUsage) / maxWords) * 100, 100))}%</span></div>
+                <div className='mt-3 h-2 w-full overflow-hidden rounded-full bg-slate-200'>
+                    <div className='h-full rounded-full bg-gradient-to-r from-cyan-500 to-violet-500' style={{ width: Math.min((Number(totalUsage) / maxWords) * 100, 100) + "%" }}></div>
                 </div>
-                <h2 className='text-sm my-2'>{totalUsage}/{maxWords}</h2>
+                <h2 className='mt-2 text-xs text-slate-500'>{Number(totalUsage).toLocaleString()} / {maxWords.toLocaleString()} used</h2>
             </div>
-            <Button variant="secondary" className="my-3 p-5 w-full text-primary" onClick={() => router.push("/dashboard/billing")}>
+            <Button className="mt-3 w-full rounded-xl bg-slate-950 text-white hover:bg-slate-800" onClick={() => router.push("/dashboard/billing")}>
                 Upgrade
             </Button>
         </div>

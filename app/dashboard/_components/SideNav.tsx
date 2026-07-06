@@ -1,7 +1,7 @@
 "use client"
 import React from 'react';
 import Image from 'next/image';
-import { History, CreditCard, User, HomeIcon, Handshake, Shield, ReceiptText } from 'lucide-react';
+import { History, CreditCard, User, HomeIcon, ArrowLeft } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -28,21 +28,6 @@ function SideNav({ onNavigate }: { onNavigate?: () => void }){
       name: 'Profile',
       icon: User,
       path: '/dashboard/profile'
-    },
-    {
-      name:'About Us',
-      icon: Handshake,
-      path: '/dashboard/About_Us'
-    },
-    {
-      name: 'Privacy Policy',
-      icon: Shield,
-      path: '/dashboard/Privacy_Policy'
-    },
-    {
-      name:'T&C',
-      icon: ReceiptText,
-      path: '/dashboard/T&C'
     }
   ];
 
@@ -50,40 +35,35 @@ function SideNav({ onNavigate }: { onNavigate?: () => void }){
 
   return (
     <motion.div 
-      className='relative h-full min-h-screen overflow-y-auto border bg-white p-5 shadow-sm'
+      className='relative flex h-full min-h-screen flex-col overflow-y-auto border-r border-slate-200 bg-white p-4'
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <div className='flex justify-center'>
+      <div className='flex items-center gap-3 px-2 py-3'>
         <motion.div 
           initial={{ scale: 0.8 }}
           animate={{ scale: 1 }}
           transition={{ type: "spring", stiffness: 100 }}
         >
-          <Image src={'/logo.svg'} alt='logo' width={120} height={120}/> 
+          <Image src={'/logo.svg'} alt='NNEGEN logo' width={44} height={44} className='h-11 w-11 rounded-xl'/>
         </motion.div>
+        <div><p className='font-bold tracking-tight text-slate-900'>NNEGEN</p><p className='text-xs text-slate-500'>AI content studio</p></div>
       </div>
-      <hr className='my-10 border'/>
+
+      <Link href='/' onClick={onNavigate} className='mt-3 flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-medium text-slate-500 transition hover:bg-slate-100 hover:text-slate-900'><ArrowLeft className='h-4 w-4' /> Back to website</Link>
 
 
-      <div className='mt-3'>
+      <div className='mt-6 flex-1'>
         {MenuList.map((menu) => (
           <Link key={menu.path} href={menu.path} className="block" onClick={onNavigate}>
             <motion.div 
-              className={`flex gap-2 mb-2 p-3 rounded-lg cursor-pointer items-center
-                hover:bg-gradient-to-r from-blue-500 to-purple-500 hover:text-white transition-all duration-200
-                ${path === menu.path ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white' : 'text-gray-800'}
+              className={`mb-1.5 flex cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200
+                ${path === menu.path ? 'bg-slate-950 text-white shadow-md shadow-slate-300' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-950'}
               `}
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 200 }}
             >
-              <menu.icon className='w-6 h-6'/>
-              <motion.h2 
-                className='text-lg'
-                whileHover={{ y: -3 }}
-                transition={{ type: "spring", stiffness: 200 }}
-              >
+              <menu.icon className='h-4 w-4'/>
+              <motion.h2>
                 {menu.name}
               </motion.h2>
             </motion.div>
@@ -92,7 +72,7 @@ function SideNav({ onNavigate }: { onNavigate?: () => void }){
       </div>
       
       <motion.div 
-        className='mt-8 w-full pb-4'
+        className='mt-5 w-full'
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}

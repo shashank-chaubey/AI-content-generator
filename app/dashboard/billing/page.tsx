@@ -1,8 +1,7 @@
 "use client";
 import React, { useState, useContext } from "react";
-import { Button } from "@/components/ui/button";
 import axios from "axios";
-import { Loader2Icon } from "lucide-react";
+import { Check, Loader2Icon, Sparkles } from "lucide-react";
 import { UserSubscription } from "@/utils/schema";
 import { db } from "@/utils/db";
 import { useUser } from "@clerk/nextjs";
@@ -23,7 +22,6 @@ declare global{
 
 function BillingPage() {
   const { user } = useUser();
-  const [selectedPlan, setSelectedPlan] = useState<string>("Free");
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
   const { setUserSubscription } = useContext(UserSubscriptionContext);
   const { setTotalUsage } = useContext(TotalUsageContext);
@@ -88,39 +86,37 @@ function BillingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 px-4 py-8 sm:p-10">
+    <div className="min-h-[calc(100vh-4rem)] px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
       <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-      <h1 className="text-center text-2xl font-bold sm:text-3xl">Choose a Plan</h1>
-      <p className="text-gray-600 text-center mb-6">Upgrade your plan to get more AI credits.</p>
+      <div className="mx-auto mb-10 max-w-2xl text-center"><div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-100 text-cyan-700"><Sparkles className="h-6 w-6" /></div><p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-700">Simple pricing</p><h1 className="mt-3 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">Create more when inspiration hits</h1><p className="mt-4 text-sm leading-6 text-slate-500 sm:text-base">Start free and move to Pro when you need a larger monthly creative budget.</p></div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+      <div className="mx-auto grid max-w-4xl grid-cols-1 gap-5 md:grid-cols-2">
         {plans.map((plan, index) => (
           <div
             key={index}
-            className={`rounded-lg border bg-white p-5 shadow-md transition-all hover:shadow-xl sm:p-6 ${
-              selectedPlan === plan.name ? "border-blue-500" : ""
-            }`}
-            onClick={() => setSelectedPlan(plan.name)}
+            className={`relative rounded-3xl border bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl sm:p-8 ${plan.name === "Pro" ? "border-slate-900 ring-1 ring-slate-900" : "border-slate-200"}`}
           >
-            <h2 className="text-2xl font-bold text-center">{plan.name}</h2>
-            <p className="text-xl font-semibold text-center text-primary mt-2">
+            {plan.name === "Pro" && <span className="absolute right-5 top-5 rounded-full bg-cyan-100 px-3 py-1 text-xs font-semibold text-cyan-800">Most popular</span>}
+            <h2 className="text-xl font-bold text-slate-950">{plan.name}</h2>
+            <p className="mt-5 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
               {plan.originalPrice && (
-                <span className="text-gray-500 line-through mr-2">₹{plan.originalPrice}</span>
+                <span className="mr-2 text-base font-normal text-slate-400 line-through">₹{plan.originalPrice}</span>
               )}
               ₹{plan.price}/month
             </p>
-            <p className="text-gray-500 text-center mt-2">{plan.description}</p>
-            <p className="text-gray-700 text-center mt-1">Credits: {plan.credits}</p>
+            <p className="mt-3 text-sm text-slate-500">{plan.description}</p>
+            <div className="my-6 h-px bg-slate-100" />
+            <ul className="space-y-3 text-sm text-slate-600"><li className="flex items-center gap-2"><Check className="h-4 w-4 text-emerald-500" />{plan.credits.toLocaleString()} monthly credits</li><li className="flex items-center gap-2"><Check className="h-4 w-4 text-emerald-500" />All content templates</li><li className="flex items-center gap-2"><Check className="h-4 w-4 text-emerald-500" />Generation history</li></ul>
             <button
               type="button"
               disabled={plan.name === "Free" || loadingPlan === plan.name}
-              className={`w-full mt-4 py-2 flex items-center justify-center text-white font-medium rounded-full ${
-                plan.name === "Free" ? "bg-gray-400" : "bg-primary hover:bg-red-700"
+              className={`mt-7 flex h-12 w-full items-center justify-center rounded-xl font-semibold transition ${
+                plan.name === "Free" ? "cursor-not-allowed bg-slate-100 text-slate-500" : "bg-slate-950 text-white hover:bg-slate-800"
               }`}
               onClick={() => CreateSubscription(plan)}
             >
               {loadingPlan === plan.name && <Loader2Icon className="animate-spin mr-2 w-5 h-5" />}
-              {selectedPlan === plan.name ? "Current Plan" : "Get Started"}
+              {plan.name === "Free" ? "Free plan" : "Upgrade to Pro"}
             </button>
           </div>
         ))}

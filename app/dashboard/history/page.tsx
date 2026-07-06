@@ -3,6 +3,7 @@ import Templates from '@/app/(data)/Templates';
 import React, { useEffect, useState } from "react";
 import { db } from "@/utils/db";
 import { AIOutput } from "@/utils/schema";
+import { desc } from "drizzle-orm";
 import { useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -26,7 +27,10 @@ const HistoryPage = () => {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const result = await db.select().from(AIOutput);
+        const result = await db
+          .select()
+          .from(AIOutput)
+          .orderBy(desc(AIOutput.id));
         
         const formattedHistory: HistoryRecord[] = result.map((item) => ({
           id: item.id,
@@ -56,22 +60,15 @@ const HistoryPage = () => {
   };
 
   return (
-    <div className="p-4 sm:p-6 lg:p-10">
-      <Link href="/dashboard">
-        <Button>
-          <ArrowLeft /> Back
-        </Button>
-      </Link>
-
-      <h1 className="mt-5 text-2xl font-bold sm:text-3xl">History</h1>
-      <p className="text-gray-600">Search your previously generated AI content</p>
+    <div className="mx-auto max-w-7xl p-4 sm:p-6 lg:p-8">
+      <div className="flex flex-wrap items-start justify-between gap-4"><div><p className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-700">Your library</p><h1 className="mt-1 text-2xl font-bold tracking-tight text-slate-950 sm:text-3xl">Generation history</h1><p className="mt-1 text-sm text-slate-500">Search and reuse your previously generated content.</p></div><Button asChild variant="outline" className="rounded-xl"><Link href="/dashboard"><ArrowLeft /> Templates</Link></Button></div>
 
       
-      <div className="mt-4">
+      <div className="mt-7">
         <input
           type="text"
-          placeholder="Search..."
-          className="w-full p-2 border border-gray-300 rounded-lg"
+          placeholder="Search by template name..."
+          className="h-12 w-full rounded-xl border border-slate-200 bg-white px-4 text-sm outline-none transition focus:border-cyan-500 focus:ring-2 focus:ring-cyan-100"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -79,12 +76,12 @@ const HistoryPage = () => {
 
       
       {filteredHistory.length === 0 ? (
-        <p className="text-gray-500 mt-4">No history found.</p>
+        <div className="mt-8 rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center text-sm text-slate-500">No matching generations found.</div>
       ) : (
         <div className="mt-6 hidden overflow-x-auto md:block">
-          <table className="w-full bg-white shadow-md rounded-lg">
+          <table className="w-full overflow-hidden rounded-2xl bg-white text-sm shadow-sm ring-1 ring-slate-200">
             <thead>
-              <tr className="bg-gray-200 text-left">
+              <tr className="bg-slate-50 text-left text-xs uppercase tracking-wider text-slate-500">
                 <th className="px-4 py-2">TEMPLATE</th>
                 <th className="px-4 py-2">AI RESP</th>
                 <th className="px-4 py-2">DATE</th>
@@ -126,7 +123,7 @@ const HistoryPage = () => {
             const matchingTemplate = Templates.find((template) => template.slug === item.templateSlug);
 
             return (
-              <article key={item.id} className="rounded-lg border bg-white p-4 shadow-sm">
+              <article key={item.id} className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex min-w-0 items-center gap-2">
                     {matchingTemplate && (

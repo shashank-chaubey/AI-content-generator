@@ -7,7 +7,6 @@ import { useParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { chatSession } from "@/utils/AiModel";
 import { db } from "@/utils/db";
 import { AIOutput } from "@/utils/schema";
 import { useUser } from "@clerk/nextjs";
@@ -39,25 +38,39 @@ const CreateNewContent: React.FC = () => {
     }
 
     setLoading(true);
-    const templateSlug = params["template-slug"] as string; 
 
-    const selectedTemplate = Templates.find((item) => item.slug === templateSlug);
+    try {
+      const templateSlug = params["template-slug"] as string;
+      const selectedTemplate = Templates.find((item) => item.slug === templateSlug);
 
-    if (!selectedTemplate) {
-      alert("Invalid template!");
+      if (!selectedTemplate) {
+        throw new Error("Invalid template.");
+      }
+
+      const prompt = JSON.stringify(FormData) + ", " + selectedTemplate.aiPrompt;
+      const response = await fetch("/api/generate-content", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt }),
+      });
+      const data = (await response.json()) as { text?: string; error?: string };
+
+      if (!response.ok) {
+        throw new Error(data.error || "Content generation failed.");
+      }
+
+      const aiResponseText = data.text || "";
+      setAiOutput(aiResponseText);
+      await SaveInDb(FormData, selectedTemplate.slug, aiResponseText);
+      setCreditUsage(Date.now());
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "Content generation failed.";
+      alert(message);
+      console.error("Content generation failed:", error);
+    } finally {
       setLoading(false);
-      return;
     }
-
-    const FinalPrompt = JSON.stringify(FormData) + ", " + selectedTemplate.aiPrompt;
-    const result = await chatSession.sendMessage(FinalPrompt);
-
-    const aiResponseText = result?.response?.text() || "";
-    setAiOutput(aiResponseText);
-
-    await SaveInDb(FormData, selectedTemplate.slug, aiResponseText);
-    setLoading(false);
-    setCreditUsage(Date.now());
   };
 
   const SaveInDb = async (FormData: any, slug: string, aiResp: string) => {
@@ -76,13 +89,14 @@ const CreateNewContent: React.FC = () => {
   };
 
   return (
-    <div className="p-4 sm:p-6 lg:p-10">
-      <Link href={"/dashboard"}>
-        <Button>
-          <ArrowLeft /> Back
+    <div className="mx-auto max-w-[1500px] p-4 sm:p-6 lg:p-8">
+      <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+        <div><p className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-600">AI workspace</p><h1 className="mt-1 text-2xl font-bold tracking-tight text-slate-950 sm:text-3xl">Create new content</h1></div>
+        <Button variant="outline" asChild className="rounded-xl">
+          <Link href={"/dashboard"}><ArrowLeft /> All templates</Link>
         </Button>
-      </Link>
-      <div className="grid grid-cols-1 gap-5 py-5 xl:grid-cols-3">
+      </div>
+      <div className="grid grid-cols-1 items-start gap-5 xl:grid-cols-[minmax(18rem,23rem)_minmax(0,1fr)]">
         {/* Form Section */}
         <FormSection
           selectedTemplate={Templates.find((item) => item.slug === params["template-slug"])}
@@ -90,7 +104,7 @@ const CreateNewContent: React.FC = () => {
           loading={loading}
         />
         {/* Output Section */}
-        <div className="min-w-0 xl:col-span-2">
+        <div className="min-w-0">
           <OutputSection aiOutput={aiOutput} loading={loading} />
         </div>
       </div>

@@ -52,7 +52,8 @@ Install the following before running the project:
    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
    CLERK_SECRET_KEY=your_clerk_secret_key
 
-   NEXT_PUBLIC_GOOGLE_GEMINI_API_KEY=your_gemini_api_key
+   GOOGLE_GEMINI_API_KEY=your_gemini_api_key
+   GOOGLE_GEMINI_MODEL=gemini-3.1-flash-lite
    NEXT_PUBLIC_DRIZZLE_DB_URL=your_neon_postgres_connection_string
 
    NEXT_PUBLIC_RAZORPAY_KEY_ID=your_razorpay_key_id

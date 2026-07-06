@@ -5,13 +5,11 @@ import Link from 'next/link'
 
 function TemplateCard(item: TEMPLATE) {
   return (
-    <Link href={'/dashboard/content/' + item?.slug}>
-      <div className='group h-full p-5 shadow-md rounded-md border bg-white
-      flex flex-col gap-3 cursor-pointer transition-all
-      hover:scale-105 hover:bg-gradient-to-r from-blue-500 to-purple-500 hover:text-white'>
-        <Image src={item.icon} alt='icon' width={50} height={50} />
-        <h2 className='font-semibold'>{item.name}</h2>
-        <p className='text-sm text-gray-500 line-clamp-2 group-hover:text-white'>
+    <Link href={'/dashboard/content/' + item?.slug} className='group block h-full rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500'>
+      <div className='flex h-full cursor-pointer flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-cyan-300 hover:shadow-xl hover:shadow-slate-200/70 sm:p-6'>
+        <div className='mb-1 flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 transition group-hover:bg-cyan-50'><Image src={item.icon} alt='' width={32} height={32} className='h-8 w-8 object-contain' /></div>
+        <h2 className='font-semibold text-slate-900'>{item.name}</h2>
+        <p className='line-clamp-3 text-sm leading-6 text-slate-500'>
           {item.desc}
         </p>
       </div>
